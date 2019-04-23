@@ -1,0 +1,70 @@
+{
+  "users": {
+    "user1": {
+      "uid": "user1",
+      "email": "user1@gmail.com",
+      "name": "username userlastname",
+      "sex": "male",
+      "qualification_avg": 3.5,
+      "qualification_count": 1,
+      "reviews": {
+        "user2": {
+          "uid": "user1",
+          "name": "username userlastname",
+          "sex": "male",
+          "message": "the best",
+          "quialification": 3.5,
+          "created_date": "01/01/1999"
+        }
+      },
+      "type": "user",
+      "location": "Bogotá"
+    }
+  },
+  "posts": {
+    "post1": {
+      "id": "post1",
+      "owner_name": "username userlastname",
+      "created_date": "01/01/1999",
+      "owner": "user1",
+      "type": "clothes",
+      "title": "I offer clothes",
+      "description": "Clothes :3",
+      "image": "https://i.avoz.es/sc/uo6Kh0onO3js1onHHNrRLV7X-Os=/x/2019/02/26/00121551208683005769902/Foto/HF27C11F1_201630.jpg",
+      "status": "active",
+      "likes_count": 1,
+      "likes": {
+        "user1": {
+          "uid": "user1",
+          "name": "username userlastname",
+          "sex": "male"
+        }
+      },
+      "comments": [
+        {
+          "uid": "user1",
+          "name": "username userlastname",
+          "sex": "male",
+          "comment": "my Comment",
+          "created_date": "01/01/1999"
+        }
+      ],
+      "price": 222.22,
+      "location": "Bogotá",
+      "images": ["image1", "image2"]
+    }
+  },
+  "complaints": {
+    "post1": {
+      "postid": "post1",
+      "user2": {
+        "uid": "user1",
+        "name": "username userlastname",
+        "sex": "male",
+        "complaint_type": "language",
+        "message": "hdp",
+        "created_date": "01/01/1999"
+      }
+    }
+  }
+}

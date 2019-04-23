@@ -1,0 +1,44 @@
+<section id="developers" class="mt-4">
+  <div class="container">
+    <div class="row pb-5">
+      <div class="col text-center">
+        <h1>Welcome to faceboot`s store</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col text-center text-uppercase">
+        <small>discover the best of</small>
+        <h3>{{ currentUser.location }}</h3>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-12  mb-4" *ngFor="let post of posts">
+        <div class="card">
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <img
+                class="card-img-top"
+                src="{{ post.image }}"
+                alt="Picture of a product"
+              />
+            </div>
+            <div class="col">
+              <div class="card-body">
+                <small
+                  ><b>{{ post.owner_name }}</b> {{ post.created_date }}</small
+                >
+                <h4 class="card-title">{{ post.title }}</h4>
+                <hr />
+                <p class="card-text">{{ post.description }}</p>
+                <div class="d-flex justify-content-end align-items-end">
+                  <span>{{ post.likes_count }} likes</span>
+                  <i class="fas fa-heart align-bottom ml-2"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
