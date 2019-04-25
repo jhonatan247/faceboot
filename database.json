@@ -37,7 +37,8 @@
         "user1": {
           "uid": "user1",
           "name": "username userlastname",
-          "sex": "male"
+          "sex": "male",
+          "date": "01/01/1999"
         }
       },
       "comments": [

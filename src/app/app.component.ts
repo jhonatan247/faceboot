@@ -21,8 +21,7 @@ export class AppComponent {
       if (auth == null || !auth.uid) {
         this.router.navigate(['']);
         this.isLogin = false;
-      } else {
-        console.log(auth);
+      } else if (router.url === '/sign-up' || router.url === '/login') {
         this.userService
           .getUser(auth.uid)
           .valueChanges()
@@ -37,6 +36,8 @@ export class AppComponent {
                 break;
             }
           });
+      } else {
+        this.isLogin = true;
       }
     });
   }

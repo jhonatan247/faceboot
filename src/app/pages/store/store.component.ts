@@ -3,6 +3,7 @@ import { UserService } from '../../services/user/user.service';
 import { AuthenticationService } from '../../services/authentication/authentication.service';
 import { PostService } from '../../services/post/post.service';
 import { User } from '../../interfaces/user/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-store',
@@ -11,11 +12,12 @@ import { User } from '../../interfaces/user/user';
 })
 export class StoreComponent implements OnInit {
   posts: Array<any> = [];
-  currentUser: any = { location: '' };
+  currentUser: User;
   constructor(
     public userService: UserService,
     public authenticationService: AuthenticationService,
-    public postService: PostService
+    public postService: PostService,
+    public router: Router
   ) {
     if (authenticationService.getCurrentUser()) {
       userService
@@ -24,7 +26,7 @@ export class StoreComponent implements OnInit {
         .subscribe(
           (currentUser: User) => {
             this.currentUser = currentUser;
-            this.fillPosts(currentUser);
+            this.fillPosts();
           },
           err => {
             console.log(err);
@@ -32,7 +34,7 @@ export class StoreComponent implements OnInit {
         );
     }
   }
-  fillPosts(currentUser: User) {
+  fillPosts() {
     this.postService
       .getPosts()
       .valueChanges()
@@ -40,8 +42,9 @@ export class StoreComponent implements OnInit {
         data => {
           this.posts = [];
           data.forEach((post: any) => {
-            if (post.location == currentUser.location) {
+            if (post.location === this.currentUser.location) {
               this.posts.push(post);
+              this.setLike(post);
             }
           });
         },
@@ -50,5 +53,49 @@ export class StoreComponent implements OnInit {
         }
       );
   }
+  setLike(post: any) {
+    this.postService
+      .getLikes(post.id)
+      .valueChanges()
+      .subscribe(likes => {
+        if (likes[this.currentUser.uid]) {
+          post.isLiked = true;
+        }
+      });
+  }
   ngOnInit() {}
+  create() {
+    this.router.navigate(['create-post']);
+  }
+  addOrRemoveLike(post) {
+    if (post.isLiked) {
+      this.removeLike(post);
+    } else {
+      this.addLike(post);
+    }
+  }
+  removeLike(post) {
+    this.postService.removeLike(post.id, this.currentUser.uid).then(dada => {
+      const newPost = {
+        id: post.id,
+        likes_count: post.likes_count - 1
+      };
+      this.postService.editPost(newPost);
+    });
+  }
+  addLike(post) {
+    const like = {
+      uid: this.currentUser.uid,
+      name: this.currentUser.name,
+      sex: this.currentUser.sex,
+      date: Date.now()
+    };
+    this.postService.addLike(post.id, like).then(data => {
+      const newPost = {
+        id: post.id,
+        likes_count: post.likes_count + 1
+      };
+      this.postService.editPost(newPost);
+    });
+  }
 }

@@ -19,4 +19,24 @@ export class PostService {
     post.id = this.angularFireDatabase.createPushId();
     return this.angularFireDatabase.object('/posts/' + post.id).set(post);
   }
+
+  editPost(post) {
+    return this.angularFireDatabase.object('/posts/' + post.id).update(post);
+  }
+
+  getLikes(id) {
+    return this.angularFireDatabase.list('/posts/' + id + '/likes/');
+  }
+
+  addLike(postId, like) {
+    return this.angularFireDatabase
+      .object('/posts/' + postId + '/likes/' + like.uid)
+      .set(like);
+  }
+
+  removeLike(postId, uid) {
+    return this.angularFireDatabase
+      .object('/posts/' + postId + '/likes/' + uid)
+      .remove();
+  }
 }

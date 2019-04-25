@@ -1,3 +1,57 @@
-<p>
-  create-post works!
-</p>
+<div class="container pt-5 pb-5">
+  <div class="col-sm-6 offset-sm-3 col-lg-4 offset-lg-4 card pt-4 pb-4">
+    <h2 style="color:#4267B2">Create product</h2>
+    <hr />
+    <div class="form-group">
+      <label for="Input name">Title</label>
+      <input
+        type="text"
+        class="form-control"
+        aria-describedby="nameHelp"
+        placeholder="Enter a title"
+        [(ngModel)]="title"
+      />
+    </div>
+    <div class="form-group">
+      <label for="Input description">description</label>
+      <textarea class="form-control" [(ngModel)]="description"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="Input name">Image</label>
+      <input
+        type="text"
+        class="form-control"
+        aria-describedby="nameHelp"
+        placeholder="Enter a image link"
+        [(ngModel)]="image"
+      />
+    </div>
+    <div class="form-group">
+      <label for="Input name">Price</label>
+      <input
+        type="number"
+        class="form-control"
+        aria-describedby="nameHelp"
+        [(ngModel)]="price"
+      />
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <button type="button" class="btn btn-light btn-lg" (click)="cancel()">
+          cancel
+        </button>
+      </div>
+      <div class="col-6 text-right">
+        <button
+          type="button"
+          class="btn btn-lg"
+          style="background:#4267B2; color:white;"
+          (click)="register()"
+        >
+          Register
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

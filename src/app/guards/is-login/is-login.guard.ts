@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+  Router
+} from '@angular/router';
 import { CanActivate } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication/authentication.service';
 
@@ -8,7 +12,11 @@ import { AuthenticationService } from '../../services/authentication/authenticat
 })
 export class IsLoginGuard implements CanActivate {
   isLogin = false;
-  constructor(public authenticationService: AuthenticationService) {
+  constructor(
+    public authenticationService: AuthenticationService,
+    public router: Router
+  ) {
+    this.isLogin = this.authenticationService.getCurrentUser() ? true : false;
     this.authenticationService.getStatus().subscribe(auth => {
       if (auth && auth.uid) {
         this.isLogin = true;
@@ -18,6 +26,15 @@ export class IsLoginGuard implements CanActivate {
     });
   }
   canActivate() {
+    if (this.router.url === '/sign-up' || this.router.url === '/login') {
+      if (this.isLogin) {
+        this.router.navigate(['']);
+      }
+      return !this.isLogin;
+    }
+    if (!this.isLogin) {
+      this.router.navigate(['login']);
+    }
     return this.isLogin;
   }
 }
