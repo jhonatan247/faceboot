@@ -26,15 +26,6 @@ export class IsLoginGuard implements CanActivate {
     });
   }
   canActivate() {
-    if (this.router.url === '/sign-up' || this.router.url === '/login') {
-      if (this.isLogin) {
-        this.router.navigate(['']);
-      }
-      return !this.isLogin;
-    }
-    if (!this.isLogin) {
-      this.router.navigate(['login']);
-    }
     return this.isLogin;
   }
 }

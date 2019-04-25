@@ -20,6 +20,7 @@ import { UserService } from './services/user/user.service';
 import { AuthenticationService } from './services/authentication/authentication.service';
 import { StoreComponent } from './pages/store/store.component';
 import { CreatePostComponent } from './pages/create-post/create-post.component';
+import { MyProductsComponent } from './pages/my-products/my-products.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { CreatePostComponent } from './pages/create-post/create-post.component';
     HomeComponent,
     HomeAdminComponent,
     StoreComponent,
-    CreatePostComponent
+    CreatePostComponent,
+    MyProductsComponent
   ],
   imports: [
     BrowserModule,

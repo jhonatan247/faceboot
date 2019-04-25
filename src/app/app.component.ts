@@ -19,7 +19,7 @@ export class AppComponent {
     this.isLogin = false;
     this.authenticationService.getStatus().subscribe(auth => {
       if (auth == null || !auth.uid) {
-        this.router.navigate(['']);
+        this.router.navigate(['login']);
         this.isLogin = false;
       } else if (router.url === '/sign-up' || router.url === '/login') {
         this.userService
@@ -27,14 +27,7 @@ export class AppComponent {
           .valueChanges()
           .subscribe((user: User) => {
             this.isLogin = true;
-            switch (user.type) {
-              case 'admin':
-                this.router.navigate(['home-admin']);
-                break;
-              case 'user':
-                this.router.navigate(['home']);
-                break;
-            }
+            router.navigate(['store']);
           });
       } else {
         this.isLogin = true;

@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user/user.service';
 import { AuthenticationService } from '../../services/authentication/authentication.service';
 import { PostService } from '../../services/post/post.service';
 import { User } from '../../interfaces/user/user';
 import { Router } from '@angular/router';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-store',
-  templateUrl: './store.component.html',
-  styleUrls: ['./store.component.sass']
+  selector: 'app-my-products',
+  templateUrl: './my-products.component.html',
+  styleUrls: ['./my-products.component.sass']
 })
-export class StoreComponent implements OnInit {
+export class MyProductsComponent implements OnInit {
   posts: Array<any> = [];
   currentUser: User;
   constructor(
@@ -42,7 +42,7 @@ export class StoreComponent implements OnInit {
         data => {
           this.posts = [];
           data.forEach((post: any) => {
-            if (post.location === this.currentUser.location) {
+            if (post.owner === this.currentUser.uid) {
               this.posts.push(post);
               this.setLike(post);
             }
@@ -67,6 +67,9 @@ export class StoreComponent implements OnInit {
       });
   }
   ngOnInit() {}
+  create() {
+    this.router.navigate(['create-post']);
+  }
   addOrRemoveLike(post) {
     if (post.isLiked) {
       this.removeLike(post);

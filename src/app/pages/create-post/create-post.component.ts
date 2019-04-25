@@ -44,11 +44,11 @@ export class CreatePostComponent implements OnInit {
           location: user.location
         };
         this.postService.createPost(product).then(data => {
-          this.router.navigate(['store']);
+          this.router.navigate(['my-products']);
         });
       });
   }
   cancel() {
-    this.router.navigate(['store']);
+    this.router.navigate(['my-products']);
   }
 }

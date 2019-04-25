@@ -2,13 +2,14 @@
   <div class="container">
     <div class="row pb-5">
       <div class="col text-center">
-        <h1>Welcome to faceboot`s store</h1>
+        <h1>{{ currentUser.name }}'s products</h1>
       </div>
     </div>
-    <div class="row">
-      <div class="col text-center text-uppercase" *ngIf="currentUser">
-        <small>discover the best of</small>
-        <h3>{{ currentUser.location }}</h3>
+    <div class="row mt-4">
+      <div class="col-2 offset-10">
+        <button type="button" class="btn btn-primary" (click)="create()">
+          <i class="fas fa-plus"></i> New post
+        </button>
       </div>
     </div>
     <div class="row mt-4">

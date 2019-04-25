@@ -25,6 +25,9 @@ export class LoginComponent implements OnInit {
   login() {
     this.authenticationService
       .loginWithEmail(this.email, this.password)
+      .then(user => {
+        this.router.navigate(['']);
+      })
       .catch(error => {
         alert('The data entered is incorrect');
       });
