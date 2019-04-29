@@ -3,7 +3,7 @@ import { AuthenticationService } from '../../services/authentication/authenticat
 import { PostService } from '../../services/post/post.service';
 import { User } from '../../interfaces/user/user';
 import { Router } from '@angular/router';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-my-products',
@@ -35,10 +35,10 @@ export class MyProductsComponent implements OnInit {
     }
   }
   fillPosts() {
-    this.postService
-      .getPosts()
-      .valueChanges()
-      .subscribe(
+    this.postService.getPosts().on('value', snap => {
+      console.log(snap.val());
+    });
+    /*.subscribe(
         data => {
           this.posts = [];
           data.forEach((post: any) => {
@@ -51,7 +51,7 @@ export class MyProductsComponent implements OnInit {
         err => {
           console.log(err);
         }
-      );
+      );*/
   }
   setLike(post: any) {
     this.postService

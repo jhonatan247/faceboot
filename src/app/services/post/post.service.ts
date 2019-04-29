@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { FirebaseApp } from '@angular/fire';
+import { Query } from '@angular/compiler/src/core';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +10,9 @@ export class PostService {
   constructor(private angularFireDatabase: AngularFireDatabase) {}
 
   getPosts() {
-    return this.angularFireDatabase.list('posts/');
+    return this.angularFireDatabase
+      .list('posts/')
+      .query.orderByChild('created_date');
   }
 
   getPost(id) {

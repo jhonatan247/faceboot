@@ -32,7 +32,7 @@ export class CreatePostComponent implements OnInit {
       .subscribe((user: User) => {
         const product = {
           owner_name: user.name,
-          creatde_date: '23/04/2019',
+          created_date: Date.now(),
           owner: user.uid,
           type: 'product',
           title: this.title,

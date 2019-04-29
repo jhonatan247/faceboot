@@ -35,7 +35,12 @@ export class StoreComponent implements OnInit {
     }
   }
   fillPosts() {
-    this.postService
+    this.postService.getPosts().on('value', snap => {
+      snap.forEach(snapp => {
+        console.log(snapp.val());
+      });
+    });
+    /*this.postService
       .getPosts()
       .valueChanges()
       .subscribe(
@@ -51,7 +56,7 @@ export class StoreComponent implements OnInit {
         err => {
           console.log(err);
         }
-      );
+      );*/
   }
   setLike(post: any) {
     this.postService
